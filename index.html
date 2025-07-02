@@ -42,7 +42,7 @@
         <button id="buyButton">Buy E-Book Now ($14.99 CAD)</button>
         <div id="download" class="download">
             <p>Thank you for your purchase! Download your e-book here:</p>
-            <a id="downloadLink" href="#" target="_blank">The Dark Side of a Canadian Real Estate Crash.pdf</a>
+            <a id="downloadLink" href="#" target="_blank">canadian-real-estate-crash.pdf</a>
         </div>
     </div>
     <div id="privacyPolicy" class="policy-section">
@@ -136,12 +136,13 @@
         const buyButton = document.getElementById('buyButton');
         const downloadDiv = document.getElementById('download');
         const downloadLink = document.getElementById('downloadLink');
-        const pdfUrl = '/The_Dark_Side_Of_A_Possible_Canadian_Real_Estate_Crash.pdf'; // Update this path to your PDF file in the repo
+        // Path updated to match renamed file
+        const pdfUrl = '/canadian-real-estate-crash.pdf';
 
         buyButton.addEventListener('click', () => {
-            // Stripe payment link provided
+            // Open Stripe payment link in a new tab
             const stripeUrl = 'https://buy.stripe.com/eVq289foSeiq8hqcKja7C06?success_url=' + encodeURIComponent(window.location.href + '?session_id={CHECKOUT_SESSION_ID}') + '&cancel_url=' + encodeURIComponent(window.location.href) + '&amount=1499¤cy=cad';
-            window.location.href = stripeUrl;
+            window.open(stripeUrl, '_blank');
         });
 
         // Check for payment success on page load
