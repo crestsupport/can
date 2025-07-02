@@ -11,15 +11,16 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            padding: 10rem 2rem; /* Increased padding for larger image area */
+            padding: 10rem 2rem;
             position: relative;
-            min-height: 300px; /* Minimum height to ensure image visibility */
+            min-height: 300px;
+            background-color: #444; /* Fallback color if image fails */
         }
         h1 {
             margin: 0;
             font-size: 2.5em;
             color: #fff;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Improve readability over image */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
             position: relative;
             z-index: 1;
         }
@@ -151,16 +152,30 @@
         const downloadLink = document.getElementById('downloadLink');
         const pdfUrl = '/canadian-real-estate-crash.pdf';
 
-        buyButton.addEventListener('click', () => {
-            console.log('Buy button clicked'); // Debug log
-            const stripeUrl = 'https://buy.stripe.com/eVq289foSeiq8hqcKja7C06?success_url=' + encodeURIComponent(window.location.href + '?session_id={CHECKOUT_SESSION_ID}') + '&cancel_url=' + encodeURIComponent(window.location.href) + '&amount=1499¤cy=cad';
-            if (stripeUrl) {
-                console.log('Opening Stripe URL:', stripeUrl); // Debug log
-                window.open(stripeUrl, '_blank');
-            } else {
-                console.log('Stripe URL generation failed'); // Debug log
-            }
-        });
+        if (buyButton) {
+            buyButton.addEventListener('click', () => {
+                console.log('Buy button clicked'); // Debug log
+                const baseUrl = 'https://buy.stripe.com/eVq289foSeiq8hqcKja7C06';
+                const successUrl = encodeURIComponent(window.location.href + '?session_id={CHECKOUT_SESSION_ID}');
+                const cancelUrl = encodeURIComponent(window.location.href);
+                const stripeUrl = `${baseUrl}?success_url=${successUrl}&cancel_url=${cancelUrl}&amount=1499&currency=cad`;
+                console.log('Generated Stripe URL:', stripeUrl); // Debug log
+                if (stripeUrl) {
+                    try {
+                        const newWindow = window.open(stripeUrl, '_blank');
+                        if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+                            console.log('Popup blocked by browser. Please allow popups for this site.');
+                        }
+                    } catch (error) {
+                        console.error('Error opening Stripe window:', error);
+                    }
+                } else {
+                    console.log('Stripe URL generation failed');
+                }
+            });
+        } else {
+            console.log('Buy button element not found');
+        }
 
         // Check for payment success on page load
         const urlParams = new URLSearchParams(window.location.search);
