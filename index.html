@@ -7,14 +7,18 @@
     <style>
         body { font-family: 'Arial', sans-serif; margin: 0; padding: 0; background-color: #f5f5f5; color: #333; text-align: center; }
         header {
-            background-image: url('book-cover.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            padding: 10rem 2rem;
             position: relative;
             min-height: 300px;
-            background-color: #444; /* Fallback color if image fails */
+            background-color: #2c3e50;
+            padding: 10rem 2rem;
+        }
+        header svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
         }
         h1 {
             margin: 0;
@@ -43,6 +47,29 @@
 </head>
 <body>
     <header>
+        <svg viewBox="0 0 1200 300" preserveAspectRatio="xMidYMid meet">
+            <rect width="1200" height="300" fill="#2c3e50"/>
+            <g transform="translate(0, 200)">
+                <!-- Skyline -->
+                <polygon points="100,0 120,50 80,50" fill="#666"/>
+                <polygon points="200,0 220,50 180,50" fill="#666"/>
+                <polygon points="300,0 320,70 280,70" fill="#888"/>
+                <polygon points="400,0 420,90 380,90" fill="#888"/>
+                <polygon points="500,0 520,60 480,60" fill="#666"/>
+                <polygon points="600,0 620,80 580,80" fill="#888"/>
+                <polygon points="700,0 720,50 680,50" fill="#666"/>
+                <polygon points="800,0 820,70 780,70" fill="#888"/>
+                <polygon points="900,0 920,60 880,60" fill="#666"/>
+                <polygon points="1000,0 1020,90 980,90" fill="#888"/>
+                <!-- Falling House -->
+                <g transform="translate(500, -50) rotate(-20)">
+                    <rect x="0" y="0" width="50" height="50" fill="#d35400"/>
+                    <polygon points="0,0 25,-20 50,0" fill="#e74c3c"/>
+                    <line x1="25" y1="0" x2="25" y2="50" stroke="#fff" stroke-width="2"/>
+                    <line x1="0" y1="25" x2="50" y2="25" stroke="#fff" stroke-width="2"/>
+                </g>
+            </g>
+        </svg>
         <h1>The Dark Side Of A Possible Canadian Real Estate Crash - What The Media Isn't Telling You</h1>
     </header>
     <div class="intro">
